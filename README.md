@@ -1,6 +1,8 @@
 # Daily.do
 
 A simple to-do app to track your daily task built with React, TypeScript, shadcn/ui, and Tailwind CSS.
+- Link: (https://dailydo.mutiarahns.com/)
+- Visit my website: (https://www.mutiarahns.com)
 
 ## 🚀 Features
 
@@ -8,7 +10,7 @@ A simple to-do app to track your daily task built with React, TypeScript, shadcn
 - Delete tasks
 - Mark tasks as completed
 
-## 🚀 Screenshots
+## 📷 Screenshots
 
 ![Daily.do Screenshot](public/images/app-preview.png)
 
