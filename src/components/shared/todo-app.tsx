@@ -1,7 +1,7 @@
 import React from "react";
 import { Todo } from "@/types/todo";
 import { Button } from "@/components/ui/button";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 import { TodoItem } from "./todo-item";
 
 export function TodoApp() {

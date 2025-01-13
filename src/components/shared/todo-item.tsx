@@ -1,5 +1,5 @@
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Todo } from "@/types/todo";
 
 type TodoItemProps = {
@@ -19,7 +19,7 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
       <label
         htmlFor={`todo-${todo.id}`}
         className={`flex-grow ${
-          todo.isCompleted ? "line-through text-gray-500" : ""
+          todo.isCompleted ? "text-gray-500 line-through" : ""
         }`}
       >
         {todo.text}
