@@ -1,6 +1,12 @@
-import { TodoItemProps } from "@/types/task";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
+import { Todo } from "@/types/todo";
+
+type TodoItemProps = {
+  todo: Todo;
+  onToggle: (id: number) => void;
+  onDelete: (id: number) => void;
+};
 
 export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (

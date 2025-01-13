@@ -1,6 +1,6 @@
 import React from "react";
-import { Todo } from "@/types/task";
-import { Button } from "../ui/button";
+import { Todo } from "@/types/todo";
+import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 import { TodoItem } from "./todo-item";
 
@@ -35,23 +35,23 @@ export function TodoApp() {
     <div className="max-w-md mx-auto mt-8">
       <h1 className="text-2xl font-bold mb-4">daily.do</h1>
 
-      <div className="flex gap-4">
+      <form className="flex gap-4" onSubmit={addTodo}>
         <Input
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="What do you want to do?"
         />
-        <Button onClick={addTodo}>Add</Button>
-      </div>
+        <Button type="submit">Add</Button>
+      </form>
 
       <ul className="mt-2 space-y-2">
-        {todos.map((item) => (
+        {todos.map((todo) => (
           <TodoItem
-            key={item.id}
-            todo={item}
-            onToggle={() => toggleTodo(item.id)}
-            onDelete={() => deleteTodo(item.id)}
+            key={todo.id}
+            todo={todo}
+            onToggle={() => toggleTodo(todo.id)}
+            onDelete={() => deleteTodo(todo.id)}
           />
         ))}
       </ul>
