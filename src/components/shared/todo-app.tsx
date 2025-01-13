@@ -8,7 +8,9 @@ export function TodoApp() {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [newTodo, setNewTodo] = React.useState("");
 
-  const addTodo = () => {
+  const addTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (newTodo.trim() === "") return;
 
     setTodos([
@@ -35,7 +37,7 @@ export function TodoApp() {
     <div className="max-w-md mx-auto mt-8">
       <h1 className="text-2xl font-bold mb-4">daily.do</h1>
 
-      <form className="flex gap-4" onSubmit={addTodo}>
+      <form className="flex gap-4" onSubmit={(e) => addTodo(e)}>
         <Input
           type="text"
           value={newTodo}
