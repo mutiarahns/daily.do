@@ -15,7 +15,12 @@ export function TodoApp() {
 
     setTodos([
       ...todos,
-      { id: todos.length + 1, text: newTodo, isCompleted: false },
+      {
+        id: todos.length + 1,
+        text: newTodo,
+        isCompleted: false,
+        date: new Date(),
+      },
     ]);
 
     setNewTodo("");
