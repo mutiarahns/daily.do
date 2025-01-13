@@ -24,8 +24,8 @@ export function TodoApp() {
   const toggleTodo = (id: number) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo,
+      ),
     );
   };
 
@@ -34,8 +34,8 @@ export function TodoApp() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">daily.do</h1>
+    <div className="mx-auto mt-8 max-w-md">
+      <h1 className="mb-4 text-2xl font-bold">daily.do</h1>
 
       <form className="flex gap-4" onSubmit={(e) => addTodo(e)}>
         <Input
