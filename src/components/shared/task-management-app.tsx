@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { TaskItem } from "@/types/todo";
 import { Separator } from "@/components/ui/separator";
-import { Label } from "@/components/ui/label";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Cardlist } from "./card-list";
 import { AddNew } from "./add-new";
@@ -75,10 +74,10 @@ export function TaskManagementApp() {
           <AddNew onSubmit={addNewTask} />
         </div>
 
-        <Label className="text-sm">
+        <p className="text-sm">
           <span className="text-gray-500">Daily.do</span> is a simple to-do app
           that helps you manage your daily tasks.
-        </Label>
+        </p>
       </div>
 
       <div className="flex flex-col gap-4 rounded-md p-4">
