@@ -1,6 +1,9 @@
-export type Todo = {
+export type TaskItem = {
   id: number;
-  text: string;
+  taskName: string;
+  taskDescription: string;
   isCompleted: boolean;
-  date: Date;
+  createdDate: Date;
+  priority: number;
+  state: "todo" | "in progress" | "done";
 };
