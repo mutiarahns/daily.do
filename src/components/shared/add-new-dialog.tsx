@@ -10,26 +10,22 @@ import { AddNewForm } from "./add-new-from";
 
 type AddNewDialogProps = {
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit: (task: TaskItem) => void;
+  handleOpenDialog: (isOpened: boolean) => void;
+  addNewTask: (task: TaskItem) => void;
 };
 
 export function AddNewDialog({
   open,
-  onOpenChange,
-  onSubmit,
+  handleOpenDialog,
+  addNewTask,
 }: AddNewDialogProps) {
-  const handleCloseDialog = () => {
-    onOpenChange(false);
-  };
-
   const onHandleSubmit = (values: TaskItem) => {
     console.log(values);
-    onSubmit(values);
+    addNewTask(values);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenDialog}>
       <DialogContent className="sm:max-w[425px]">
         <DialogHeader>
           <DialogTitle>Add New Task</DialogTitle>
@@ -38,7 +34,7 @@ export function AddNewDialog({
         <div className="grid gap-4 py-4">
           <AddNewForm
             onSubmitTask={onHandleSubmit}
-            handleCloseDialog={handleCloseDialog}
+            handleCloseDialog={() => handleOpenDialog(false)}
           />
         </div>
       </DialogContent>

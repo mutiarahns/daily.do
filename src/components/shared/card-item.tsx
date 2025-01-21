@@ -17,14 +17,15 @@ import {
 } from "@/components/ui/select";
 import { SelectItem } from "@/components/ui/select";
 import { TaskItem } from "@/types/todo";
+import { DeleteTask } from "./delete-task";
 
-export function CardItem({
-  tasks,
-  onUpdate,
-}: {
+type CardItemInterface = {
   tasks: TaskItem[];
-  onUpdate: (id: number, task: TaskItem) => void;
-}) {
+  updateTask: (id: number, task: TaskItem) => void;
+  deleteTask: (id: number) => void;
+};
+
+export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
   const priorityMapping = (priority: number) => {
     switch (priority) {
       case 1:
@@ -53,13 +54,16 @@ export function CardItem({
     }
   };
 
-  const updateTodo = (id: number, value: "todo" | "in progress" | "done") => {
+  const handleUpdateTask = (
+    id: number,
+    value: "todo" | "in progress" | "done",
+  ) => {
     const task = tasks.find((task) => task.id === id);
 
     if (!task) return;
 
     task.state = value;
-    onUpdate(id, task);
+    updateTask(id, task);
   };
 
   return (
@@ -68,8 +72,10 @@ export function CardItem({
         return (
           <Card key={task.id} className="flex flex-col">
             <CardHeader>
-              {priorityMapping(task.priority)}
-
+              <div className="flex items-center justify-between">
+                <div>{priorityMapping(task.priority)}</div>
+                <DeleteTask task={task} deleteTask={deleteTask} />
+              </div>
               <CardTitle className="text-sm">{task.taskName}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -93,7 +99,10 @@ export function CardItem({
 
               <Select
                 onValueChange={(value) =>
-                  updateTodo(task.id, value as "todo" | "in progress" | "done")
+                  handleUpdateTask(
+                    task.id,
+                    value as "todo" | "in progress" | "done",
+                  )
                 }
               >
                 <SelectTrigger className="w-[120px] text-gray-500">

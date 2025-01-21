@@ -1,19 +1,39 @@
-import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { AddNewDialog } from "./add-new-dialog";
 import { TaskItem } from "@/types/todo";
 
-export function AddNew({ onSubmit }: { onSubmit: (task: TaskItem) => void }) {
+type AddNewProps = {
+  children: React.ReactNode;
+  addNewTask: (task: TaskItem) => void;
+  buttonVariant:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | null
+    | undefined;
+};
+
+export function AddNew({ children, addNewTask, buttonVariant }: AddNewProps) {
   const [open, setOpen] = useState(false);
+
+  const handleOpenDialog = (isOpened: boolean) => {
+    setOpen(isOpened);
+  };
 
   return (
     <>
-      <Button variant="default" onClick={() => setOpen(true)}>
-        <Plus />
-        <p className="text-[12px]">Add Task</p>
+      <Button variant={buttonVariant} onClick={() => setOpen(true)}>
+        {children}
       </Button>
-      <AddNewDialog open={open} onOpenChange={setOpen} onSubmit={onSubmit} />
+      <AddNewDialog
+        open={open}
+        handleOpenDialog={handleOpenDialog}
+        addNewTask={addNewTask}
+      />
     </>
   );
 }

@@ -4,8 +4,9 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Cardlist } from "./card-list";
 import { AddNew } from "./add-new";
+import { Plus } from "lucide-react";
 
-const dummyData: TaskItem[] = [
+const initialTasks: TaskItem[] = [
   {
     id: 1,
     taskName: "Deploy your new project in one-click.",
@@ -53,8 +54,23 @@ const dummyData: TaskItem[] = [
   },
 ];
 
+const taskStates = [
+  {
+    key: "todo",
+    title: "To-Do",
+  },
+  {
+    key: "in progress",
+    title: "In Progress",
+  },
+  {
+    key: "done",
+    title: "Done",
+  },
+];
+
 export function TaskManagementApp() {
-  const [tasks, setTasks] = useState<TaskItem[]>(dummyData);
+  const [tasks, setTasks] = useState<TaskItem[]>(initialTasks);
 
   const updateTask = (id: number, todo: TaskItem) => {
     setTasks(tasks.map((item) => (item.id === id ? todo : item)));
@@ -66,12 +82,23 @@ export function TaskManagementApp() {
     setTasks([...tasks, newTask]);
   };
 
+  const deletTask = (id: number) => {
+    const task = tasks.find((task) => task.id === id);
+
+    if (task) {
+      setTasks(tasks.filter((task) => task.id !== id));
+    }
+  };
+
   return (
     <div className="max-w mx-auto mt-8 px-4 xl:max-w-7xl">
       <div className="mb-4 flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <h1 className="mb-4 text-2xl font-bold">daily.do</h1>
-          <AddNew onSubmit={addNewTask} />
+          <AddNew addNewTask={addNewTask} buttonVariant="default">
+            <Plus />
+            <p className="text-[12px]">Add Task</p>
+          </AddNew>
         </div>
 
         <p className="text-sm">
@@ -85,23 +112,21 @@ export function TaskManagementApp() {
 
         <ScrollArea className="whitespace-nowrap pb-10">
           <div className="flex gap-6">
-            <Cardlist
-              tasks={tasks.filter((todo) => todo.state === "todo").reverse()}
-              state="To Do"
-              onUpdate={updateTask}
-            />
-            <Cardlist
-              tasks={tasks
-                .filter((todo) => todo.state === "in progress")
-                .reverse()}
-              state="In Progress"
-              onUpdate={updateTask}
-            />
-            <Cardlist
-              tasks={tasks.filter((todo) => todo.state === "done").reverse()}
-              state="Done"
-              onUpdate={updateTask}
-            />
+            {taskStates.map((state) => (
+              <Cardlist
+                key={`card-${state}`}
+                tasks={tasks
+                  .filter((todo) => todo.state === state.key)
+                  .reverse()}
+                state={state.title}
+                updateTask={updateTask}
+                deleteTask={deletTask}
+              >
+                <AddNew addNewTask={addNewTask} buttonVariant="ghost">
+                  <Plus />
+                </AddNew>
+              </Cardlist>
+            ))}
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
