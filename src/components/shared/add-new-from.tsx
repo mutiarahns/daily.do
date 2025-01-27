@@ -21,6 +21,7 @@ import {
   SelectItem,
 } from "../ui/select";
 import { TaskItem } from "@/types/todo";
+import { Textarea } from "../ui/textarea";
 
 const formSchema = z.object({
   taskName: z.string().min(1, {
@@ -97,9 +98,9 @@ export function AddNewForm({
             <FormItem>
               <FormLabel>Task Description</FormLabel>
               <FormControl>
-                <Input
-                  type="taskDescription"
+                <Textarea
                   placeholder="Input task description"
+                  className="resize-none"
                   {...field}
                 />
               </FormControl>
