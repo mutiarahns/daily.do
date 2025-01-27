@@ -1,3 +1,5 @@
+export type TaskItemState = "todo" | "in-progress" | "done";
+
 export type TaskItem = {
   id: number;
   taskName: string;
@@ -5,5 +7,5 @@ export type TaskItem = {
   isCompleted: boolean;
   createdDate: Date;
   priority: number;
-  state: "todo" | "in progress" | "done";
+  state: TaskItemState;
 };
