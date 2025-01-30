@@ -5,6 +5,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Cardlist } from "./card-list";
 import { AddNew } from "./add-new";
 import { Plus } from "lucide-react";
+import { Link } from "react-router";
 
 const initialTasks: TaskItem[] = [
   {
@@ -94,7 +95,9 @@ export function TaskManagementApp() {
     <div className="max-w mx-auto mt-8 px-4 xl:max-w-7xl">
       <div className="mb-4 flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <h1 className="mb-4 text-2xl font-bold">daily.do</h1>
+          <Link to="/about">
+            <h1 className="mb-4 text-2xl font-bold">daily.do</h1>
+          </Link>
           <AddNew addNewTask={addNewTask} buttonVariant="default">
             <Plus />
             <p className="text-[12px]">Add Task</p>
