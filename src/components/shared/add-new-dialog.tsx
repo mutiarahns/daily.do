@@ -34,7 +34,7 @@ export function AddNewDialog({
         <div className="grid gap-4 py-4">
           <AddNewForm
             onSubmitTask={onHandleSubmit}
-            handleCloseDialog={() => handleOpenDialog(false)}
+            handleOpenDialog={handleOpenDialog}
           />
         </div>
       </DialogContent>

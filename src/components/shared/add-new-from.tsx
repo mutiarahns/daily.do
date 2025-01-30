@@ -19,9 +19,9 @@ import {
   SelectContent,
   SelectTrigger,
   SelectItem,
-} from "../ui/select";
-import { TaskItem } from "@/types/todo";
-import { Textarea } from "../ui/textarea";
+} from "@/components/ui/select";
+import { TaskItem, TaskItemState } from "@/types/todo";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   taskName: z.string().min(1, {
@@ -38,12 +38,12 @@ const formSchema = z.object({
 
 type AddNewFormProps = {
   onSubmitTask: (task: TaskItem) => void;
-  handleCloseDialog: () => void;
+  handleOpenDialog: (isOpened: boolean) => void;
 };
 
 export function AddNewForm({
   onSubmitTask,
-  handleCloseDialog,
+  handleOpenDialog,
 }: AddNewFormProps) {
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -57,6 +57,7 @@ export function AddNewForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+
     const newTask: TaskItem = {
       id: 0,
       taskName: values.taskName,
@@ -64,10 +65,10 @@ export function AddNewForm({
       isCompleted: false,
       createdDate: new Date(),
       priority: parseInt(values.priority),
-      state: values.state as "todo" | "in progress" | "done",
+      state: values.state as TaskItemState,
     };
 
-    handleCloseDialog();
+    handleOpenDialog(false);
     onSubmitTask(newTask);
   }
 
@@ -143,7 +144,7 @@ export function AddNewForm({
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="todo">To Do</SelectItem>
-                  <SelectItem value="in progress">Inprogress</SelectItem>
+                  <SelectItem value="in-progress">Inprogress</SelectItem>
                   <SelectItem value="done">Done</SelectItem>
                 </SelectContent>
               </Select>

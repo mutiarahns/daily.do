@@ -56,7 +56,7 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
 
   const handleUpdateTask = (
     id: number,
-    value: "todo" | "in progress" | "done",
+    value: "todo" | "in-progress" | "done",
   ) => {
     const task = tasks.find((task) => task.id === id);
 
@@ -101,7 +101,7 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
                 onValueChange={(value) =>
                   handleUpdateTask(
                     task.id,
-                    value as "todo" | "in progress" | "done",
+                    value as "todo" | "in-progress" | "done",
                   )
                 }
               >
@@ -110,7 +110,7 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="todo">To Do</SelectItem>
-                  <SelectItem value="in progress">In Progress</SelectItem>
+                  <SelectItem value="in-progress">In Progress</SelectItem>
                   <SelectItem value="done">Done</SelectItem>
                 </SelectContent>
               </Select>

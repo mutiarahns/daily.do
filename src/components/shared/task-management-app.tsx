@@ -42,7 +42,7 @@ const initialTasks: TaskItem[] = [
     isCompleted: false,
     createdDate: new Date(),
     priority: 2,
-    state: "in progress",
+    state: "in-progress",
   },
   {
     id: 5,
@@ -61,7 +61,7 @@ const taskStates = [
     title: "To-Do",
   },
   {
-    key: "in progress",
+    key: "in-progress",
     title: "In Progress",
   },
   {
@@ -83,7 +83,7 @@ export function TaskManagementApp() {
     setTasks([...tasks, newTask]);
   };
 
-  const deletTask = (id: number) => {
+  const deleteTask = (id: number) => {
     const task = tasks.find((task) => task.id === id);
 
     if (task) {
@@ -123,7 +123,7 @@ export function TaskManagementApp() {
                   .reverse()}
                 state={state.title}
                 updateTask={updateTask}
-                deleteTask={deletTask}
+                deleteTask={deleteTask}
               >
                 <AddNew addNewTask={addNewTask} buttonVariant="ghost">
                   <Plus />
