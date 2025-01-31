@@ -19,6 +19,7 @@ import { SelectItem } from "@/components/ui/select";
 import { TaskItem } from "@/types/todo";
 import { DeleteTask } from "./delete-task";
 import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 type CardItemInterface = {
   tasks: TaskItem[];
@@ -77,12 +78,10 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
                 <div>{priorityMapping(task.priority)}</div>
                 <div className="flex items-center space-x-2">
                   <DeleteTask task={task} deleteTask={deleteTask} />
-                  <Button
-                    onClick={() => (window.location.href = `/tasks/${task.id}`)}
-                    className="z-50 p-0 text-sm text-green-800 hover:bg-transparent"
-                    variant={"ghost"}
-                  >
-                    <Eye />
+                  <Button variant="ghost" size="icon-xs" tint="green">
+                    <Link to={`/tasks/${task.id}`}>
+                      <Eye />
+                    </Link>
                   </Button>
                 </div>
               </div>

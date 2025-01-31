@@ -21,8 +21,9 @@ export function DeleteTask({ task, deleteTask }: DeleteTaskInterface) {
     <>
       <Button
         variant="ghost"
+        size="icon-xs"
+        tint="red"
         onClick={() => setOpen(true)}
-        className="z-50 p-0 text-red-500 hover:bg-transparent"
       >
         <Trash2 />
       </Button>
