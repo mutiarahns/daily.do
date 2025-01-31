@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ChevronDown, ChevronsUp, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronsUp, ChevronUp, Eye } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -18,6 +18,7 @@ import {
 import { SelectItem } from "@/components/ui/select";
 import { TaskItem } from "@/types/todo";
 import { DeleteTask } from "./delete-task";
+import { Button } from "../ui/button";
 
 type CardItemInterface = {
   tasks: TaskItem[];
@@ -70,11 +71,20 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
     <div className="grid-row-4 grid gap-2">
       {tasks.map((task) => {
         return (
-          <Card key={task.id} className="flex flex-col">
+          <Card className="flex flex-col" key={task.id}>
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="relative flex items-center justify-between">
                 <div>{priorityMapping(task.priority)}</div>
-                <DeleteTask task={task} deleteTask={deleteTask} />
+                <div className="flex items-center space-x-2">
+                  <DeleteTask task={task} deleteTask={deleteTask} />
+                  <Button
+                    onClick={() => (window.location.href = `/tasks/${task.id}`)}
+                    className="z-50 p-0 text-sm text-green-800 hover:bg-transparent"
+                    variant={"ghost"}
+                  >
+                    <Eye />
+                  </Button>
+                </div>
               </div>
               <CardTitle className="text-sm">{task.taskName}</CardTitle>
             </CardHeader>

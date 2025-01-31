@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { TaskItem } from "@/types/todo";
-import { Separator } from "@/components/ui/separator";
-import { ScrollBar } from "@/components/ui/scroll-area";
-import { Cardlist } from "./card-list";
-import { AddNew } from "./add-new";
 import { Plus } from "lucide-react";
+import { Link, Outlet } from "react-router";
+import { AddNew } from "@/components/shared/add-new";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const initialTasks: TaskItem[] = [
   {
@@ -54,27 +53,8 @@ const initialTasks: TaskItem[] = [
   },
 ];
 
-const taskStates = [
-  {
-    key: "todo",
-    title: "To-Do",
-  },
-  {
-    key: "in-progress",
-    title: "In Progress",
-  },
-  {
-    key: "done",
-    title: "Done",
-  },
-];
-
-export function TaskManagementApp() {
+export function LayoutRoute() {
   const [tasks, setTasks] = useState<TaskItem[]>(initialTasks);
-
-  const updateTask = (id: number, todo: TaskItem) => {
-    setTasks(tasks.map((item) => (item.id === id ? todo : item)));
-  };
 
   const addNewTask = (task: TaskItem) => {
     console.log(task);
@@ -82,34 +62,34 @@ export function TaskManagementApp() {
     setTasks([...tasks, newTask]);
   };
 
-  const deleteTask = (id: number) => {
-    const task = tasks.find((task) => task.id === id);
-
-    if (task) {
-      setTasks(tasks.filter((task) => task.id !== id));
-    }
-  };
-
   return (
-    <div className="flex flex-col gap-4 rounded-md">
-      <Separator />
+    <div className="max-w mx-auto flex min-h-screen flex-col px-4 py-8 xl:max-w-7xl">
+      <header className="mb-4 flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <Link to="/about">
+            <h1 className="mb-4 text-2xl font-bold">daily.do</h1>
+          </Link>
+          <AddNew addNewTask={addNewTask} buttonVariant="default">
+            <Plus />
+            <p className="text-[12px]">Add Task</p>
+          </AddNew>
+        </div>
 
-      <div className="flex gap-6">
-        {taskStates.map((state) => (
-          <Cardlist
-            key={`card-${state.key}`}
-            tasks={tasks.filter((todo) => todo.state === state.key).reverse()}
-            state={state.title}
-            updateTask={updateTask}
-            deleteTask={deleteTask}
-          >
-            <AddNew addNewTask={addNewTask} buttonVariant="ghost">
-              <Plus />
-            </AddNew>
-          </Cardlist>
-        ))}
-      </div>
-      <ScrollBar orientation="horizontal" />
+        <p className="text-sm">
+          <span className="text-gray-500">Daily.do</span> is a simple to-do app
+          that helps you manage your daily tasks.
+        </p>
+      </header>
+
+      <ScrollArea className="flex-[1]">
+        <Outlet />
+      </ScrollArea>
+
+      <footer>
+        <p className="pt-5 text-center text-sm">
+          Copyright © {new Date().getFullYear()} Daily.do. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }

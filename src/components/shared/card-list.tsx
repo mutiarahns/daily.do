@@ -19,7 +19,7 @@ export function Cardlist({
 }: CardListInterface) {
   console.log(tasks);
   return (
-    <ScrollArea className="h-[680px] w-[390px] rounded-md bg-gray-100 p-4">
+    <ScrollArea className="h-[670px] w-[400px] rounded-md bg-gray-100 p-4">
       <div className="mb-2 flex items-center justify-between">
         <h1 className="text-lg font-semibold">{state}</h1>
         {children}
