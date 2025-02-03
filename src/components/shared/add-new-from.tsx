@@ -23,7 +23,7 @@ import {
 import { TaskItem, TaskItemState } from "@/types/todo";
 import { Textarea } from "@/components/ui/textarea";
 
-const formSchema = z.object({
+export const formSchema = z.object({
   taskName: z.string().min(1, {
     message: "Task name is required",
   }),

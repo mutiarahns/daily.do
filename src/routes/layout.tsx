@@ -1,60 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskItem } from "@/types/todo";
 import { Plus } from "lucide-react";
 import { Link, Outlet } from "react-router";
 import { AddNew } from "@/components/shared/add-new";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-const initialTasks: TaskItem[] = [
-  {
-    id: 1,
-    taskName: "Deploy your new project in one-click.",
-    taskDescription: "Deploy your new project in one-click.",
-    isCompleted: false,
-    createdDate: new Date(),
-    priority: 1,
-    state: "todo",
-  },
-  {
-    id: 2,
-    taskName: "Deploy your new project in one-click.",
-    taskDescription: "Deploy your new project in one-click.",
-    isCompleted: false,
-    createdDate: new Date(),
-    priority: 1,
-    state: "todo",
-  },
-  {
-    id: 3,
-    taskName: "Deploy your new project in one-click.",
-    taskDescription: "Deploy your new project in one-click.",
-    isCompleted: false,
-    createdDate: new Date(),
-    priority: 1,
-    state: "todo",
-  },
-  {
-    id: 4,
-    taskName: "Deploy your new project in one-click.",
-    taskDescription: "Deploy your new project in one-click.",
-    isCompleted: false,
-    createdDate: new Date(),
-    priority: 2,
-    state: "in-progress",
-  },
-  {
-    id: 5,
-    taskName: "Deploy your new project in one-click.",
-    taskDescription: "Deploy your new project in one-click.",
-    isCompleted: false,
-    createdDate: new Date(),
-    priority: 3,
-    state: "done",
-  },
-];
+import { getTasksFromStorage, setTaskToStorage } from "@/modules/task";
 
 export function LayoutRoute() {
-  const [tasks, setTasks] = useState<TaskItem[]>(initialTasks);
+  const [tasks, setTasks] = useState(getTasksFromStorage());
+
+  useEffect(() => {
+    setTaskToStorage(tasks);
+  }, [tasks]);
 
   const addNewTask = (task: TaskItem) => {
     console.log(task);

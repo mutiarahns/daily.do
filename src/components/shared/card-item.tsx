@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ChevronDown, ChevronsUp, ChevronUp, Eye } from "lucide-react";
+import { ChevronDown, ChevronsUp, ChevronUp, Edit } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -80,7 +80,7 @@ export function CardItem({ tasks, updateTask, deleteTask }: CardItemInterface) {
                   <DeleteTask task={task} deleteTask={deleteTask} />
                   <Button variant="ghost" size="icon-xs" tint="green">
                     <Link to={`/tasks/${task.id}`}>
-                      <Eye />
+                      <Edit />
                     </Link>
                   </Button>
                 </div>
