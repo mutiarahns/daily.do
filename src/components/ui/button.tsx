@@ -29,6 +29,8 @@ const buttonVariants = cva(
       tint: {
         red: "text-red-700 hover:text-red-600",
         green: "text-green-700 hover:text-green-600",
+        lightGreen:
+          "hover:border-green-500 hover:bg-green-100 hover:text-green-700",
       },
     },
     defaultVariants: {

@@ -14,9 +14,8 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<LayoutRoute />}>
           <Route index path="/" element={<App />} />
           <Route path="about" element={<About />} />
+          <Route path="tasks/:id" element={<TaskDetail />} />
         </Route>
-
-        <Route path="tasks/:id" element={<TaskDetail />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
